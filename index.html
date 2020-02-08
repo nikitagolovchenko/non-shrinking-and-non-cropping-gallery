@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			*,
+			*::before,
+			*::after {
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+			}
+			.card-wrap {
+				display: flex;
+				flex-wrap: wrap;
+			}
+			.card {
+				position: relative;
+                margin: 2px;
+			}
+			img {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				vertical-align: bottom;
+			}
+            .placeholder {
+                flex-grow: 100;
+                flex-basis: 240px;
+                height: 0;
+                margin: 0;
+            }
+		</style>
+	</head>
+	<body>
+		<div class="card-wrap">
+			<div class="card" >
+                <div class="card-padding"></div>
+				<img src="./images/000000843.jpg" alt="" />
+			</div>
+			<div class="card" >
+                <div class="card-padding"></div>
+				<img src="./images/0_8eb56_842bba74_XL-640x400.jpg" alt="" />
+            </div>
+            <div class="card" >
+                <div class="card-padding"></div>
+				<img src="./images/1547367999_1.jpg" alt="" />
+            </div>
+            <div class="card" >
+                <div class="card-padding"></div>
+				<img src="./images/1551516106_1.jpg" alt="" />
+            </div>
+            <div class="card" >
+                <div class="card-padding"></div>
+				<img src="./images/23-14.jpg" alt="" />
+            </div>
+            <div class="card" >
+                <div class="card-padding"></div>
+				<img src="./images/abb6a800ab2193fcedd9bda566b7402c.jpg" alt="" />
+            </div>
+            <div class="card" >
+                <div class="card-padding"></div>
+				<img src="./images/d986a9476263f1e9399e2f0f6020f6da.jpg" alt="" />
+            </div>
+            <div class="card" >
+                <div class="card-padding"></div>
+				<img src="./images/volki-zhivotnye-43887.jpg" alt="" />
+            </div>
+            <div class="card" >
+                <div class="card-padding"></div>
+				<img src="./images/Без названия (1).jpg" alt="" />
+            </div>
+            <div class="card" >
+                <div class="card-padding"></div>
+				<img src="./images/Без названия (2).jpg" alt="" />
+            </div>
+            <div class="card" >
+                <div class="card-padding"></div>
+				<img src="./images/Без названия (3).jpg" alt="" />
+            </div>
+            <div class="card" >
+                <div class="card-padding"></div>
+				<img src="./images/Без названия.jpg" alt="" />
+            </div>
+		</div>
+
+
+		<script>
+			window.addEventListener('load', () => {
+                let cardWrap = document.querySelector('.card-wrap');
+				let imgs = document.querySelectorAll('.card');
+                // приблизиттельная нужная высота изображений:
+                let imgRowHeight = 200;
+
+				imgs.forEach(item => {
+                    let img = item.querySelector('img');
+                    let cardPadding = item.querySelector('.card-padding');
+
+					let width = img.naturalWidth;
+					let height = img.naturalHeight;
+
+                    // полученное значение для ширины и flex-grow:
+                    let imgWidth = width * imgRowHeight / height;
+                    // значение для padding-bottom в %:
+                    let paddingBottom = height / width * 100;
+
+                    item.style.width = `${imgWidth}px`;
+                    item.style.flexGrow = `${imgWidth}`;
+                    cardPadding.style.paddingBottom = `${paddingBottom}%`;
+				});
+
+
+                // placeholders, чтобы последние фото не росли из-за flex-grow:
+                for(let i = 0; i < 10; i++) {
+                    let elem = document.createElement('div');
+                    elem.classList.add('placeholder');
+                    cardWrap.appendChild(elem);
+                }
+			});
+		</script>
+	</body>
+</html>
